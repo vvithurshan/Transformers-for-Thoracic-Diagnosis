@@ -67,3 +67,36 @@ We applied **Grad-CAM** to visualize attention regions and ensure models focus o
 * CNNs remain competitive in low-data or highly imbalanced clinical settings.
 
 ---
+
+# Vision Transformer Fine-Tuning Scripts
+
+This repository contains scripts for fine-tuning Vision Transformer (ViT) models with different strategies.
+
+## Files and Their Purpose
+
+### 1. `ViT_Classification_head_Final_TF_Block_trainable.py`
+
+* **Trainable Parts:** Classification head + final Transformer block
+* **Description:** Fine-tunes the last Transformer block along with the classification head. This allows the model to adjust high-level features while training the output layer for your specific task.
+* **Use Case:** Medium dataset sizes where some feature adaptation is needed.
+* **Risk:** Moderate overfitting risk compared to training only the head.
+
+---
+
+### 2. `ViT_Classification_head_trainable.py`
+
+* **Trainable Parts:** Only the classification head
+* **Description:** Keeps the ViT backbone frozen and trains only the output layer.
+* **Use Case:** Small datasets where stable and reliable training is required.
+* **Risk:** Low overfitting risk.
+
+---
+
+### 3. `ViT_unfreeze_all.py`
+
+* **Trainable Parts:** Entire ViT model
+* **Description:** Fully fine-tunes the model, allowing all layers to adapt to the dataset.
+* **Use Case:** Large datasets or tasks requiring full adaptation.
+* **Risk:** High risk of overfitting and unstable training on smaller datasets.
+
+---
